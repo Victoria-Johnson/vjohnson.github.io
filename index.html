@@ -40,10 +40,11 @@
       font-size: 1.5rem;
     }
     .interactive-box {
-      margin-bottom: 2rem;
       background-color: #161b22;
-      padding: 1rem;
+      padding: 2rem;
       border-radius: 10px;
+      text-align: center;
+      margin-top: 2rem;
       box-shadow: 0 0 12px rgba(90, 125, 255, 0.3);
     }
     .interactive-box input[type="text"] {
@@ -52,7 +53,7 @@
       border: 1px solid #30363d;
       padding: 0.5rem;
       border-radius: 5px;
-      width: 80%;
+      width: 60%;
       font-size: 1rem;
     }
     .interactive-box button {
@@ -68,21 +69,30 @@
     .interactive-box button:hover {
       background-color: #2ea043;
     }
-    .greeting-output {
+    #greetingOutput {
       margin-top: 1rem;
-      font-style: italic;
-      color: #a1a1a1;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    .greeting-output.show {
-      opacity: 1;
+      font-size: 1.1rem;
+      color: #58a6ff;
+      background-color: #0d1117;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      border-left: 4px solid #238636;
+      transition: all 0.3s ease-in-out;
     }
     .glitch-img {
-      display: block;
-      margin: 2rem auto;
-      max-width: 100%;
       animation: glitchFade 2s ease-out;
+      display: block;
+      margin: 1rem auto;
+      max-width: 100%;
+    }
+    .banner-img {
+      display: block;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(90, 125, 255, 0.3);
+      margin-top: 1.5rem;
     }
     @keyframes glitchFade {
       0% { opacity: 0; transform: translateY(-20px) scale(1.02); }
@@ -90,20 +100,104 @@
       20% { opacity: 0.8; transform: translateY(-10px) scale(1.01); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
+    .project-img {
+      width: 70%; 
+      max-width: 500px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border: 2px solid #8250df;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(130, 80, 223, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    }
+    .project-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(130, 80, 223, 0.9);
+    }
+    .project-caption {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+    }
+    .glitch-separator {
+      height: 2px;
+      background: linear-gradient(to right, #8250df, transparent);
+      margin: 3rem 0;
+    }
+    .skill-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e6edf3;
+  box-shadow: 0 0 12px rgba(90, 125, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+  text-align: center;
+  min-width: 120px;
+}
+.skill-card:hover {
+  transform: scale(1.08);
+  background-color: #238636;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(35, 134, 54, 0.8);
+}
+.contact-icon {
+  text-align: center;
+  color: #e6edf3;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-icon i {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+  display: block;
+  color: #58a6ff;
+  text-shadow: 0 0 8px #58a6ff;
+}
+.contact-icon span {
+  display: block;
+  margin-top: 0.3rem;
+}
+.contact-icon:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 12px #58a6ff;
+}
+
   </style>
   <script>
-    function greetUser() {
-      const nameInput = document.getElementById("nameInput").value;
-      const output = document.getElementById("greetingOutput");
-      if (nameInput.trim() !== "") {
-        output.textContent = `Welcome, ${nameInput}! Thanks for visiting my portfolio.`;
-        output.classList.add("show");
-        setTimeout(() => {
-          output.classList.remove("show");
-          output.textContent = "";
-        }, 4000);
-      }
+    function displayGreeting() {
+      const name = document.getElementById('greetingName').value;
+      const output = document.getElementById('greetingOutput');
+      output.textContent = `Welcome, ${name}! Thanks for visiting my portfolio.`;
+      output.style.opacity = 1;
+      setTimeout(() => {
+        output.style.opacity = 0;
+      }, 3000);
     }
+
+  function toggleSidebar() {
+  const sidebar = document.getElementById("feedbackSidebar");
+  sidebar.style.right = sidebar.style.right === "0px" ? "-350px" : "0px";
+}
+
+function submitFeedback() {
+  const text = document.getElementById("feedbackText").value;
+  if (text.trim()) {
+    alert("Feedback submitted! Thank you.");
+    document.getElementById("feedbackText").value = "";
+    toggleSidebar();
+  } else {
+    alert("Please enter feedback before submitting.");
+  }
+}
+
   </script>
 </head>
 <body>
@@ -112,54 +206,55 @@
   <p>Computer Science Student | Data Analyst | AI Engineer</p>
 </header>
 
-<section class="interactive-box">
+<section id="greeting">
   <h2><i class="fas fa-hand-sparkles"></i> Interactive Greeting</h2>
-  <input type="text" id="nameInput" placeholder="Enter your name here..." />
-  <button onclick="greetUser()">Submit</button>
-  <p class="greeting-output" id="greetingOutput"></p>
-</section>
-
-<section>
-  <h2><i class="fas fa-user"></i> Professional Self-Assessment</h2>
-  <p>Throughout my time in the Computer Science program at SNHU, I have developed a well-rounded skill set in software development, data handling, and problem-solving. This program encouraged me to think critically, collaborate in technical environments, and create scalable, secure solutions in both team and solo contexts.</p>
-  <p>In <strong>Software Design and Engineering</strong>, I enhanced a Java-based contact manager by modularizing the architecture, integrating service and test layers, and incorporating exception handling. This project challenged my ability to plan out reusable code, write unit tests with JUnit, and practice SOLID design principles — all of which are vital to professional software development workflows.</p>
-  <p>My <strong>Algorithms and Data Structures</strong> project centered around improving performance in a mobile inventory management app. The original code used linear search logic and frequent I/O operations. I optimized it by introducing indexed database queries and caching with HashMaps. This experience sharpened my understanding of computational complexity and real-time efficiency, as well as applying algorithmic solutions in real-world applications.</p>
-  <p>For <strong>Databases</strong>, I worked on a Python Flask web app tied to a MongoDB backend. Originally a static query tool, I enhanced the app by implementing dynamic filtering, building an analytics dashboard using Jupyter Notebook, and adding transaction safety. These additions not only demonstrated my backend development skills, but also my ability to extract insights and visualize data effectively, which are key competencies in data analysis and system design.</p>
-  <p>Outside of these key artifacts, I explored AI logic in game development, integrating heuristic evaluation for smarter computer opponents in a checkers game. I also practiced communication and collaboration in group-based coding assignments and real-world client simulations, where conveying progress and integrating feedback were essential.</p>
-  <p>This portfolio presents those efforts cohesively, showcasing the breadth and depth of my capabilities in computer science. The enhancements made in each artifact weren’t just functional upgrades — they represented deliberate improvements tied to course outcomes in software engineering, algorithm design, data management, and secure development practices.</p>
-  <img src="Professional%20SelfAssessment.png" alt="Professional Self-Assessment Title" class="glitch-img" />
-</section>
-
-<section>
-  <h2><i class="fas fa-list"></i> Table of Contents</h2>
-  <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
-    <li style="margin: 0.5rem 0;"><i class="fas fa-video"></i> <a href="#video">Code Review Video</a></li>
-    <li style="margin: 0.5rem 0;"><i class="fas fa-code"></i> <a href="#software">Software Design & Engineering</a></li>
-    <li style="margin: 0.5rem 0;"><i class="fas fa-cogs"></i> <a href="#algorithms">Algorithms & Data Structures</a></li>
-    <li style="margin: 0.5rem 0;"><i class="fas fa-database"></i> <a href="#databases">Databases</a></li>
-    <li style="margin: 0.5rem 0;"><i class="fas fa-address-book"></i> <a href="#contact">Contact</a></li>
-    <li style="margin: 0.5rem 0;"><i class="fas fa-tools"></i> <a href="#skills">Skills</a></li>
-  </ul>
-</section>
-
-<section id="video">
-  <h2><i class="fas fa-video"></i> Code Review Video</h2>
-  <div class="video-container" style="background-color:#161b22; padding:1.5rem; border-radius:12px; box-shadow: 0 0 18px rgba(90,125,255,0.2);">
-    <iframe src="https://www.youtube.com/embed/lJ4Ago-RUpI" allowfullscreen></iframe>
-    <p class="video-description">This code review video showcases an in-depth walk-through of one of my enhanced Java projects. I explain the original file structure, discuss the pain points addressed through modularization and unit testing, and highlight the improvements that align with Software Engineering and Data Structure principles covered in the course. This walkthrough serves as a visual narrative for the skills demonstrated in my portfolio.</p>
+  <div class="interactive-box">
+    <input type="text" id="greetingName" placeholder="Enter your name" />
+    <button onclick="displayGreeting()">Submit</button>
+    <p id="greetingOutput"></p>
   </div>
 </section>
 
-<section class="project-section">
-  <h2>Projects</h2>
-    <p>Explore my core computer science artifacts below. Each section includes the original and enhanced versions of the work, demonstrating my development in key areas:</p>
-  <ul style="list-style-type: square; padding-left: 1.5rem;">
-    <li><strong>Software Design & Engineering</strong> – Java-based CLI contact manager, improved with error handling and modular structure.</li>
-    <li><strong>Algorithms & Data Structures</strong> – Android inventory manager enhanced with optimized queries and caching.</li>
-    <li><strong>Databases</strong> – Python/MongoDB animal shelter application enhanced for data mining and dashboard analytics.</li>
+<section id="self-assessment">
+  <h2><i class="fas fa-user-check"></i> Professional Self-Assessment</h2>
+  <p>
+    Throughout the Computer Science program at SNHU, I’ve been able to build a strong foundation in modern technologies and problem-solving techniques. Collaborating on team-based assignments helped me develop key communication and project management skills, while technical challenges across multiple courses taught me how to analyze problems deeply and create scalable solutions.
+  </p>
+  <p>
+    I’ve demonstrated skills in software design, Java and Python development, working with REST APIs, managing structured and unstructured data, and implementing secure software practices. My understanding of data structures and algorithms improved significantly while developing responsive and efficient applications, and my experience with databases allowed me to explore both SQL and NoSQL environments.
+  </p>
+  <p>
+    Beyond course projects, I took initiative by enhancing legacy code, implementing AI logic in a checkers game, and redesigning Python scripts for MongoDB-based systems. These projects—spanning software engineering, algorithms, and databases—highlight my ability to identify shortcomings, plan enhancements, and deploy scalable solutions. This ePortfolio brings all of that together—providing a visual representation of my original and improved work, aligned with SNHU’s program outcomes and industry needs.
+  </p>
+  <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/Professional%20SelfAssessment.png" alt="Professional Self-Assessment Banner" class="banner-img">
+</section>
+
+<section id="toc">
+  <h2><i class="fas fa-list"></i> Table of Contents</h2>
+  <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+    <li style="margin: 0.5rem 0;"><i class="fas fa-hand-sparkles"></i> <a href="#greeting">Interactive Greeting</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-user-check"></i> <a href="#self-assessment">Professional Self-Assessment</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-list"></i> <a href="#toc">Table of Contents</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-video"></i> <a href="#code-review">Code Review Video</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-code"></i> <a href="#projects">Projects</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-tools"></i> <a href="#skills">Interactive Skills</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-envelope-open-text"></i> <a href="#contact">Contact</a></li>
   </ul>
+</section>
+
+<section id="code-review">
+  <h2><i class="fas fa-video"></i> Code Review Video</h2>
+  <div class="interactive-box">
+    <iframe width="100%" height="400" src="https://www.youtube.com/embed/lJ4Ago-RUpI" frameborder="0" allowfullscreen></iframe>
+    <p>This code review video walks through one of my enhanced projects, outlining how I improved its architecture, refactored redundant logic, and aligned the design with software engineering principles. It also includes commentary on design decisions and coding standards I followed throughout development.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <h2><i class="fas fa-code"></i> Projects</h2>
+  <p>Explore my core computer science artifacts below. Each section includes the original and enhanced versions of the work, demonstrating my development in key areas:</p>
   <div>
-   <h2 style="background: linear-gradient(to right, #2c3e50, #4ca1af); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">💻 Software Design & Engineering</h2>
+    <h3 style="background: linear-gradient(to right, #2c3e50, #4ca1af); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">💻 Software Design & Engineering</h3>
     <p>The original file was a Java-based contact manager that lacked modular design and error handling. The enhancements introduced modularization, service and test separation, and full JUnit test coverage. Validation and exception handling were added to increase system stability. These changes improved maintainability, testability, and user experience for production-readiness.</p>
     <a href="https://github.com/victoriasakata/CS320" target="_blank">
       <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS320.png" alt="Software Design & Engineering Project Screenshot" class="project-img" />
@@ -170,7 +265,7 @@
   <div class="glitch-separator"></div>
 
   <div>
-   <h2 style="background: linear-gradient(to right, #42275a, #734b6d); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">⚙️ Algorithms & Data Structures</h2>
+    <h3 style="background: linear-gradient(to right, #42275a, #734b6d); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">⚙️ Algorithms & Data Structures</h3>
     <p>This project focused on an Android-based inventory manager using Java. Initially, the code relied on inefficient linear searches and frequent database access. Enhancements involved restructuring the SQLite logic to use indexed queries and a HashMap for caching, resulting in faster load times and reduced redundant calls. This was done to optimize app responsiveness and showcase algorithmic efficiency improvements.</p>
     <a href="https://github.com/victoriasakata/CS360" target="_blank">
       <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS360.png" alt="Algorithms Project Screenshot" class="project-img" />
@@ -181,7 +276,7 @@
   <div class="glitch-separator"></div>
 
   <div>
-  <h2 style="background: linear-gradient(to right, #16222A, #3A6073); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">🗄️ Databases</h2>
+    <h3 style="background: linear-gradient(to right, #16222A, #3A6073); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">🗄️ Databases</h3>
     <p>The initial artifact was a Python Flask application using MongoDB to manage animal shelter records. The enhancement involved implementing advanced filtering queries, dashboard visualizations via Jupyter Notebook, and transactional safety for database operations. This allowed the app to support real-world data analysis and reinforced my full-stack and NoSQL database skills.</p>
     <a href="https://github.com/victoriasakata/CS340" target="_blank">
       <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS340.png" alt="Databases Project Screenshot" class="project-img" />
@@ -189,24 +284,58 @@
     <p class="project-caption">Click the Image to View Project Files</p>
   </div>
 </section>
-
+  
 <section id="skills">
-  <h2>Interactive Skills</h2>
-  <div class="skills">
-    <div class="skill-bar" style="--level: 90%"><i class="fas fa-code"></i> <span>Java</span></div>
-    <div class="skill-bar" style="--level: 85%"><i class="fas fa-database"></i> <span>MongoDB</span></div>
-    <div class="skill-bar" style="--level: 80%"><i class="fas fa-project-diagram"></i> <span>Software Engineering</span></div>
-    <div class="skill-bar" style="--level: 75%"><i class="fas fa-lock"></i> <span>Security</span></div>
-    <div class="skill-bar" style="--level: 80%"><i class="fas fa-network-wired"></i> <span>API Integration</span></div>
-    <div class="skill-bar" style="--level: 85%"><i class="fas fa-cogs"></i> <span>Algorithms</span></div>
+  <h2><i class="fas fa-tools"></i> Interactive Skills</h2>
+  <p style="text-align:center; font-style:italic; color:#9ca3af;">
+    Hover to explore my top skills—each skill animates to highlight my strengths.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-top:2rem;">
+    <div class="skill-card"><i class="fab fa-java"></i> Java</div>
+    <div class="skill-card"><i class="fab fa-python"></i> Python</div>
+    <div class="skill-card"><i class="fas fa-database"></i> MongoDB</div>
+    <div class="skill-card"><i class="fas fa-table"></i> SQL</div>
+    <div class="skill-card"><i class="fab fa-html5"></i> HTML & CSS</div>
+    <div class="skill-card"><i class="fab fa-js-square"></i> JavaScript</div>
+    <div class="skill-card"><i class="fas fa-robot"></i> AI & Heuristics</div>
+    <div class="skill-card"><i class="fas fa-chart-line"></i> Data Analysis</div>
+    <div class="skill-card"><i class="fas fa-vial"></i> Unit Testing</div>
   </div>
 </section>
 
 <section id="contact">
   <h2><i class="fas fa-envelope-open-text"></i> Contact</h2>
-  <p style="font-size: 1.1rem; text-align: center;">Feel free to reach out or connect with me below:</p>
-  <div class="contact-icons">
-    <a href="mailto:victoriasakata@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-    <a href="https://www.linkedin.com/in/victoria-sakata2010/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+  <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 2rem;">
+    <a href="mailto:victoriasakata@gmail.com" target="_blank" style="text-decoration: none;">
+      <div class="contact-icon">
+        <i class="fas fa-envelope"></i>
+        <span>Email</span>
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/in/victoria-sakata2010/" target="_blank" style="text-decoration: none;">
+      <div class="contact-icon">
+        <i class="fab fa-linkedin"></i>
+        <span>LinkedIn</span>
+      </div>
+    </a>
   </div>
 </section>
+
+<!-- Feedback Sidebar -->
+<div id="feedbackSidebar" style="position: fixed; right: -350px; top: 0; width: 300px; height: 100%; background-color: #161b22; box-shadow: -3px 0 10px rgba(0,0,0,0.6); padding: 1rem; transition: right 0.4s ease-in-out; z-index: 9999;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 style="color: #58a6ff; margin: 0;"><i class="fas fa-comment-alt"></i> Feedback</h3>
+    <button onclick="toggleSidebar()" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">&times;</button>
+  </div>
+  <textarea id="feedbackText" placeholder="Leave your feedback..." style="width: 100%; height: 70%; margin-top: 1rem; background-color: #0e1117; color: #e6edf3; border: 1px solid #30363d; border-radius: 5px; padding: 0.5rem;"></textarea>
+  <button onclick="submitFeedback()" style="margin-top: 1rem; background-color: #238636; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; width: 100%;">Submit</button>
+</div>
+
+<!-- Floating Button -->
+<div onclick="toggleSidebar()" style="position: fixed; bottom: 20px; right: 20px; background-color: #58a6ff; color: white; padding: 0.75rem; border-radius: 50%; box-shadow: 0 0 12px #58a6ff; cursor: pointer; z-index: 9999;">
+  <i class="fas fa-comment-dots"></i>
+</div>
+
+
+</body>
+</html>
