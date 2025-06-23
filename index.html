@@ -4,5 +4,200 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Victoria Johnson | Portfolio</title>
-  ...
-</html>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #0e1117;
+      color: #e6edf3;
+    }
+    header {
+      background: linear-gradient(135deg, #1f6feb, #8250df);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      border-left: 4px solid #58a6ff;
+      padding-left: 0.75rem;
+      margin-top: 2rem;
+      font-size: 1.5rem;
+    }
+    .interactive-box {
+      margin-bottom: 2rem;
+      background-color: #161b22;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(90, 125, 255, 0.3);
+    }
+    .interactive-box input[type="text"] {
+      background-color: #0e1117;
+      color: #e6edf3;
+      border: 1px solid #30363d;
+      padding: 0.5rem;
+      border-radius: 5px;
+      width: 80%;
+      font-size: 1rem;
+    }
+    .interactive-box button {
+      background-color: #238636;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+    .interactive-box button:hover {
+      background-color: #2ea043;
+    }
+    .greeting-output {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #a1a1a1;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .greeting-output.show {
+      opacity: 1;
+    }
+    .glitch-img {
+      display: block;
+      margin: 2rem auto;
+      max-width: 100%;
+      animation: glitchFade 2s ease-out;
+    }
+    @keyframes glitchFade {
+      0% { opacity: 0; transform: translateY(-20px) scale(1.02); }
+      10% { opacity: 0.5; transform: translateY(10px) scale(0.98); }
+      20% { opacity: 0.8; transform: translateY(-10px) scale(1.01); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+  <script>
+    function greetUser() {
+      const nameInput = document.getElementById("nameInput").value;
+      const output = document.getElementById("greetingOutput");
+      if (nameInput.trim() !== "") {
+        output.textContent = `Welcome, ${nameInput}! Thanks for visiting my portfolio.`;
+        output.classList.add("show");
+        setTimeout(() => {
+          output.classList.remove("show");
+          output.textContent = "";
+        }, 4000);
+      }
+    }
+  </script>
+</head>
+<body>
+<header>
+  <h1>Victoria Johnson</h1>
+  <p>Computer Science Student | Data Analyst | AI Engineer</p>
+</header>
+
+<section class="interactive-box">
+  <h2><i class="fas fa-hand-sparkles"></i> Interactive Greeting</h2>
+  <input type="text" id="nameInput" placeholder="Enter your name here..." />
+  <button onclick="greetUser()">Submit</button>
+  <p class="greeting-output" id="greetingOutput"></p>
+</section>
+
+<section>
+  <h2><i class="fas fa-user"></i> Professional Self-Assessment</h2>
+  <p>Throughout my time in the Computer Science program at SNHU, I have developed a well-rounded skill set in software development, data handling, and problem-solving. This program encouraged me to think critically, collaborate in technical environments, and create scalable, secure solutions in both team and solo contexts.</p>
+  <p>In <strong>Software Design and Engineering</strong>, I enhanced a Java-based contact manager by modularizing the architecture, integrating service and test layers, and incorporating exception handling. This project challenged my ability to plan out reusable code, write unit tests with JUnit, and practice SOLID design principles — all of which are vital to professional software development workflows.</p>
+  <p>My <strong>Algorithms and Data Structures</strong> project centered around improving performance in a mobile inventory management app. The original code used linear search logic and frequent I/O operations. I optimized it by introducing indexed database queries and caching with HashMaps. This experience sharpened my understanding of computational complexity and real-time efficiency, as well as applying algorithmic solutions in real-world applications.</p>
+  <p>For <strong>Databases</strong>, I worked on a Python Flask web app tied to a MongoDB backend. Originally a static query tool, I enhanced the app by implementing dynamic filtering, building an analytics dashboard using Jupyter Notebook, and adding transaction safety. These additions not only demonstrated my backend development skills, but also my ability to extract insights and visualize data effectively, which are key competencies in data analysis and system design.</p>
+  <p>Outside of these key artifacts, I explored AI logic in game development, integrating heuristic evaluation for smarter computer opponents in a checkers game. I also practiced communication and collaboration in group-based coding assignments and real-world client simulations, where conveying progress and integrating feedback were essential.</p>
+  <p>This portfolio presents those efforts cohesively, showcasing the breadth and depth of my capabilities in computer science. The enhancements made in each artifact weren’t just functional upgrades — they represented deliberate improvements tied to course outcomes in software engineering, algorithm design, data management, and secure development practices.</p>
+  <img src="Professional%20SelfAssessment.png" alt="Professional Self-Assessment Title" class="glitch-img" />
+</section>
+
+<section>
+  <h2><i class="fas fa-list"></i> Table of Contents</h2>
+  <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+    <li style="margin: 0.5rem 0;"><i class="fas fa-video"></i> <a href="#video">Code Review Video</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-code"></i> <a href="#software">Software Design & Engineering</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-cogs"></i> <a href="#algorithms">Algorithms & Data Structures</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-database"></i> <a href="#databases">Databases</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-address-book"></i> <a href="#contact">Contact</a></li>
+    <li style="margin: 0.5rem 0;"><i class="fas fa-tools"></i> <a href="#skills">Skills</a></li>
+  </ul>
+</section>
+
+<section id="video">
+  <h2><i class="fas fa-video"></i> Code Review Video</h2>
+  <div class="video-container" style="background-color:#161b22; padding:1.5rem; border-radius:12px; box-shadow: 0 0 18px rgba(90,125,255,0.2);">
+    <iframe src="https://www.youtube.com/embed/lJ4Ago-RUpI" allowfullscreen></iframe>
+    <p class="video-description">This code review video showcases an in-depth walk-through of one of my enhanced Java projects. I explain the original file structure, discuss the pain points addressed through modularization and unit testing, and highlight the improvements that align with Software Engineering and Data Structure principles covered in the course. This walkthrough serves as a visual narrative for the skills demonstrated in my portfolio.</p>
+  </div>
+</section>
+
+<section class="project-section">
+  <h2>Projects</h2>
+    <p>Explore my core computer science artifacts below. Each section includes the original and enhanced versions of the work, demonstrating my development in key areas:</p>
+  <ul style="list-style-type: square; padding-left: 1.5rem;">
+    <li><strong>Software Design & Engineering</strong> – Java-based CLI contact manager, improved with error handling and modular structure.</li>
+    <li><strong>Algorithms & Data Structures</strong> – Android inventory manager enhanced with optimized queries and caching.</li>
+    <li><strong>Databases</strong> – Python/MongoDB animal shelter application enhanced for data mining and dashboard analytics.</li>
+  </ul>
+  <div>
+   <h2 style="background: linear-gradient(to right, #2c3e50, #4ca1af); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">💻 Software Design & Engineering</h2>
+    <p>The original file was a Java-based contact manager that lacked modular design and error handling. The enhancements introduced modularization, service and test separation, and full JUnit test coverage. Validation and exception handling were added to increase system stability. These changes improved maintainability, testability, and user experience for production-readiness.</p>
+    <a href="https://github.com/victoriasakata/CS320" target="_blank">
+      <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS320.png" alt="Software Design & Engineering Project Screenshot" class="project-img" />
+    </a>
+    <p class="project-caption">Click the Image to View Project Files</p>
+  </div>
+
+  <div class="glitch-separator"></div>
+
+  <div>
+   <h2 style="background: linear-gradient(to right, #42275a, #734b6d); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">⚙️ Algorithms & Data Structures</h2>
+    <p>This project focused on an Android-based inventory manager using Java. Initially, the code relied on inefficient linear searches and frequent database access. Enhancements involved restructuring the SQLite logic to use indexed queries and a HashMap for caching, resulting in faster load times and reduced redundant calls. This was done to optimize app responsiveness and showcase algorithmic efficiency improvements.</p>
+    <a href="https://github.com/victoriasakata/CS360" target="_blank">
+      <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS360.png" alt="Algorithms Project Screenshot" class="project-img" />
+    </a>
+    <p class="project-caption">Click the Image to View Project Files</p>
+  </div>
+
+  <div class="glitch-separator"></div>
+
+  <div>
+  <h2 style="background: linear-gradient(to right, #16222A, #3A6073); padding: 0.5rem 1rem; border-radius: 8px; color: #fff;">🗄️ Databases</h2>
+    <p>The initial artifact was a Python Flask application using MongoDB to manage animal shelter records. The enhancement involved implementing advanced filtering queries, dashboard visualizations via Jupyter Notebook, and transactional safety for database operations. This allowed the app to support real-world data analysis and reinforced my full-stack and NoSQL database skills.</p>
+    <a href="https://github.com/victoriasakata/CS340" target="_blank">
+      <img src="https://raw.githubusercontent.com/Victoria-Johnson/vjohnson.github.io/main/images/CS340.png" alt="Databases Project Screenshot" class="project-img" />
+    </a>
+    <p class="project-caption">Click the Image to View Project Files</p>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Interactive Skills</h2>
+  <div class="skills">
+    <div class="skill-bar" style="--level: 90%"><i class="fas fa-code"></i> <span>Java</span></div>
+    <div class="skill-bar" style="--level: 85%"><i class="fas fa-database"></i> <span>MongoDB</span></div>
+    <div class="skill-bar" style="--level: 80%"><i class="fas fa-project-diagram"></i> <span>Software Engineering</span></div>
+    <div class="skill-bar" style="--level: 75%"><i class="fas fa-lock"></i> <span>Security</span></div>
+    <div class="skill-bar" style="--level: 80%"><i class="fas fa-network-wired"></i> <span>API Integration</span></div>
+    <div class="skill-bar" style="--level: 85%"><i class="fas fa-cogs"></i> <span>Algorithms</span></div>
+  </div>
+</section>
